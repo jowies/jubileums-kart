@@ -7,3 +7,27 @@ html, body, div, main {
   font-family: 'PT Sans', 'Roboto', 'Helvetica', sans-serif;
   height: '100%';
 }
+
+html, body, div, main {
+  font-family: 'Roboto', 'PT Sans', 'Helvetica', sans-serif;
+  height: '100%';
+}
+
+div {
+  box-sizing: border-box,
+}
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+}
+
+.menu {
+  color: #9E9E9E;
+}
+
+.menu:hover {
+  color: #212121;
+}

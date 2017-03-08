@@ -1,65 +1,43 @@
 import React from 'react';
-import Kart from '../components/Kart.jsx';
 import '../stylesheets/leaflet.scss';
+import Opened from './Opened.jsx';
+import Closed from './Closed.jsx';
 
-export default class Main extends React.Component {
+export default class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 0,
-      height: 0,
+      open: true,
     };
-    this.resize = this.resize.bind(this);
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
   }
 
-  componentWillMount() {
-    window.addEventListener('resize', this.resize);
-    this.resize();
-  }
-
-  setHeight() {
+  open(e) {
+    e.preventDefault();
     this.setState({
-      height: this.getHeight(),
+      open: true,
     });
   }
 
-  getHeight() {
-    return (window.innerHeight
-      || document.documentElement.clientHeight
-      || document.body.clientHeight);
-  }
-
-  setWidth() {
+  close(e) {
+    e.preventDefault();
     this.setState({
-      width: this.getWidth(),
+      open: false,
     });
   }
 
-  getWidth() {
-    return (window.innerWidth
-      || document.documentElement.clientWidth
-      || document.body.clientWidth);
-  }
-
-  resize() {
-    this.setHeight();
-    this.setWidth();
-  }
-
-  componentWillUnMount() {
-    window.removeEventListener('resize', this.resize);
-  }
 
   render() {
     return (
-      <div style={{ position: 'relative' }}>
-        <div style={{ position: 'absolute', zIndex: '9000' }}>Vi prøvver sånn</div>
-        <Kart points={this.props.points} height={this.state.height} width={this.state.width} />
+      <div style={{ zIndex: '9000', position: 'absolute' }} >
+        {this.state.open ? <Opened width={this.props.width} height={this.props.height} onClick={this.close} /> : <Closed onClick={this.open} />}
       </div>
-      );
+    );
   }
 }
 
-Main.propTypes = {
-  points: React.PropTypes.array,
+Menu.propTypes = {
+  height: React.PropTypes.number,
+  width: React.PropTypes.number,
 };

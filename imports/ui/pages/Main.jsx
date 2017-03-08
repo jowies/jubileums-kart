@@ -1,5 +1,6 @@
 import React from 'react';
 import Kart from '../components/Kart.jsx';
+import Menu from '../components/Menu.jsx';
 import '../stylesheets/leaflet.scss';
 
 export default class Main extends React.Component {
@@ -53,7 +54,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <div style={{ position: 'relative' }}>
-        <div style={{ position: 'absolute', zIndex: '9000' }}>Vi prøvver sånn</div>
+        <Menu width={this.state.width} height={this.state.height} />
         <Kart points={this.props.points} height={this.state.height} width={this.state.width} />
       </div>
       );
