@@ -21,7 +21,7 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border: none;
+    border: 0;
 }
 
 .menu {
@@ -30,4 +30,61 @@ button {
 
 .menu:hover {
   color: #212121;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-family: Roboto;
+  font-size: 16px;
+  appearance: 0;
+  box-shadow: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  outline: 0;
+  color: #212121
+}
+
+.inputfield {
+  padding: 10px;
+  border: solid 1px #757575;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+.inputfield:focus, inputfield.focus {
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
+}
+
+.button {
+  background-color: #b11b11;
+  color: #F5f5f5;
+  font-size: 16px;
+  border-radius: 0;
+  border: solid 1px #757575;
+  padding: 10px;
+  box-shadow: 0;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s, border 0.3s, color 0.3s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+}
+
+.button:hover, .button.hover {
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696
+}
+
+.border {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #b11b11;
+  padding: 0 5px 0 5px;
+  margin-top: 5px;
 }

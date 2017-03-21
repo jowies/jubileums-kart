@@ -7,7 +7,7 @@ export default class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      open: false,
     };
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);

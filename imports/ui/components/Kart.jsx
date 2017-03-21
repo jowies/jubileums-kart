@@ -21,7 +21,7 @@ export default class Kart extends React.Component {
       for (let i = 0; i < prevProps.points.length; i++) {
         if (prevProps.points[i].active ? !this.props.points[i].active : this.props.points[i].active) {
           if (this.props.points[i].active) {
-            this.points[i].setStyle({ fillColor: 'red', color: 'red' });
+            this.points[i].setStyle({ fillColor: '#b11b11', color: '#b11b11' });
           } else {
             this.points[i].setStyle({ fillColor: 'grey', color: 'grey' });
           }
@@ -49,8 +49,8 @@ export default class Kart extends React.Component {
       stroke: false,
     };
     if (point.active) {
-      options.color = '#D50000';
-      options.fillColor = '#D50000';
+      options.color = '#b11b11';
+      options.fillColor = '#b11b11';
     } else {
       options.color = 'grey';
       options.fillColor = 'grey';
@@ -59,12 +59,19 @@ export default class Kart extends React.Component {
   }
 
   addPoints() {
-    this.props.points.forEach((point) => {
-      const circle = L.circle([point.long, point.lat], this.getOptions(point)).addTo(this.mymap);
+    for (let i = 0; i < this.props.points.length; i++) {
+      const point = this.props.points[i];
+      const circle = L.circle([point.lat, point.long], this.getOptions(point)).addTo(this.mymap);
       circle.id = point._id;
       this.points.push(circle);
-      circle.bindPopup(point.label);
-    });
+      const status = point.active ? 'Ikke funnet' : 'Funnet';
+      const customPopup = '<p>Hint: ' + point.label + '</p><p>Status: ' + status + '</p>';
+      circle.bindPopup(customPopup);
+    }
+  }
+
+  click(e) {
+    console.log(e.latlng);
   }
 
   addMap() {
@@ -72,7 +79,7 @@ export default class Kart extends React.Component {
     L.tileLayer('https://api.mapbox.com/styles/v1/jowies/cizsbztnx008f2rkwdtl6c910/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam93aWVzIiwiYSI6ImNpeWt3MHRyYzAwMXgyeHFsY2V1em93YmEifQ.XeeFjGAlq5WE2jB_tQtVvw',
       {
         maxZoom: 21,
-        minZoom: 16,
+        minZoom: 15,
       }).addTo(this.mymap);
     L.control.zoom({
       position: 'bottomright',
@@ -83,6 +90,7 @@ export default class Kart extends React.Component {
     const attribution = this.mymap.attributionControl;
     attribution.setPrefix('<a href="http://jubileum.abakus.no"><img style="height: 75px; width: 225px"src="logo.svg"></a>');
     this.addPoints();
+    this.mymap.on('click', this.click);
   }
 
   render() {
